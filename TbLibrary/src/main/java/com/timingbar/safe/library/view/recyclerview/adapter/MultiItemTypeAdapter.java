@@ -36,6 +36,12 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         this (context, new ArrayList<T> ());
     }
 
+    /**
+     * 获取当前项Item(position参数)是哪种类型的布局
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         if (!useItemViewDelegateManager ())
@@ -43,7 +49,13 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mItemViewDelegateManager.getItemViewType (mDatas.get (position), position);
     }
 
-
+    /**
+     * 通过viewType这个类型判断去创建不同item的ViewHolder
+     *
+     * @param parent
+     * @param viewType View的类型
+     * @return
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layoutId = mItemViewDelegateManager.getItemViewLayoutId (viewType);
@@ -52,6 +64,12 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return holder;
     }
 
+    /**
+     * 绑定holder 数据
+     *
+     * @param holder
+     * @param t
+     */
     public void convert(ViewHolder holder, T t) {
         mItemViewDelegateManager.convert (holder, t, holder.getAdapterPosition ());
     }
@@ -60,7 +78,13 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return true;
     }
 
-
+    /**
+     * 设置事件
+     *
+     * @param parent
+     * @param viewHolder
+     * @param viewType
+     */
     protected void setListener(final ViewGroup parent, final ViewHolder viewHolder, int viewType) {
         if (!isEnabled (viewType))
             return;
@@ -86,18 +110,29 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         });
     }
 
+    /**
+     * 绑定holder
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         convert (holder, mDatas.get (position));
     }
 
+    /**
+     * @return 数据的个数
+     */
     @Override
     public int getItemCount() {
         int itemCount = mDatas.size ();
         return itemCount;
     }
 
-
+    /**
+     * @return 数据值的集合
+     */
     public List<T> getDatas() {
         return mDatas;
     }
@@ -116,20 +151,38 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mItemViewDelegateManager.getItemViewDelegateCount () > 0;
     }
 
+    /**
+     * RecyclerView 的item的点击事件
+     *
+     * @param <T>
+     */
     public interface OnItemClickListener<T> {
         void onItemClick(View view, RecyclerView.ViewHolder holder, T o, int position);
 
         boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, T o, int position);
     }
 
+    /**
+     * 设置点击事件
+     *
+     * @param onItemClickListener
+     */
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
+    /**
+     * 添加数据
+     *
+     * @param data
+     */
     public void addDataAll(List data) {
         mDatas.addAll (data);
     }
 
+    /**
+     * 清空数据
+     */
     public void clearData() {
         mDatas.clear ();
     }

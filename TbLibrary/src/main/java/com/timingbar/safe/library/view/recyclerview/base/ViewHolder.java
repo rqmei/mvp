@@ -270,4 +270,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public void onRelease() {
+        
+    }
 }
