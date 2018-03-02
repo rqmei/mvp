@@ -1,0 +1,14 @@
+com.timingbar.android
+    app ------> app相关的一些全局配置及通用的工具
+    safe ----->当前的app所有相关的UI及业务逻辑
+        control =====>此包放契约类（定义的mvp的接口）
+        modle   =====>M层存放一些关于数据的类
+            api =====>存放网络请求的一些类
+            entity =====>存放实体类
+        presenter =====>P层，存放相关的业务逻辑
+        ui =====>V(UI)层，用户可见的UI
+            activity =====>存放页面相关的activity和fragment
+            adapter  =====>存放datapter
+            common   =====>存放V层的基类
+            holder   =====>
+            widget   =====>存放V层自定义的View

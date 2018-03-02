@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:orientation="vertical"
+              tools:context="com.timingbar.android.safe.safe.ui.activity.MainActivity">
+
+    <ImageView android:layout_width="50dp"
+               android:layout_height="50dp"
+               android:scaleType="centerInside"
+               android:id="@+id/image"
+    />
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/bg1"
+    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:id="@+id/bg2"
+                  android:orientation="horizontal"
+    />
+    <TextView android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:id="@+id/bg3"
+    />
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:id="@+id/bg4"
+    />
+    <EditText android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:id="@+id/bg5"
+    />
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="显示消息"
+              android:id="@+id/tv_show_msg"
+    />
+</LinearLayout>

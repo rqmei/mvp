@@ -1,0 +1,13 @@
+com.timingbar.android.library
+base ---->activity、fragment、application等（base）基类包
+di   ---->此包下面为依赖注入对象
+   comgponent ===> dagger需要的component
+   module     ===> dagger需要的module
+   
+http ---->此包主要是存放网络相关的配置
+integration ---->
+mvp ---->此包存放关于mvp相关的对象
+util ---->此包主要存放通用的工具类
+view ---->此包主要存放一些自定义的view
+    imageloader ===>对于图片加载的一些配置
+        glide ===>第三方glide+glide-transformations实现图片的加载和变形
