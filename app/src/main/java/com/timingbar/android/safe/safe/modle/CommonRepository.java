@@ -4,9 +4,12 @@ import com.timingbar.android.safe.app.utils.BaseJson;
 import com.timingbar.android.safe.safe.control.UserControl;
 
 import com.timingbar.android.safe.safe.modle.api.service.CommonService;
+import com.timingbar.android.safe.safe.modle.entity.Lesson;
 import com.timingbar.android.safe.safe.modle.entity.VersionCode;
 import com.timingbar.safe.library.mvp.IRepositoryManager;
 import io.reactivex.Observable;
+
+import java.util.List;
 
 
 /**
@@ -45,5 +48,15 @@ public class CommonRepository implements UserControl.Modle {
     public Observable<BaseJson<VersionCode>> getVersionCode() {
         Observable<BaseJson<VersionCode>> refreshRecord = manager.createRetrofitService (CommonService.class).getVersionCode ("1");
         return refreshRecord;
+    }
+
+    /**
+     * 获取视频章、
+     * 268287
+     * 365344
+     */
+    public Observable<BaseJson<List<Lesson>>> getLessonPhase() {
+        Observable<BaseJson<List<Lesson>>> lessonPhase = manager.createRetrofitService (CommonService.class).getLessonPhase ("365344");
+        return lessonPhase;
     }
 }

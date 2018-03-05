@@ -44,21 +44,22 @@ public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivi
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState (savedInstanceState);
-        if (mPresenter == null) {
-            mPresenter = obtainPresenter ();
-        }
         if (appComponent == null) {
             appComponent = ((IApp) this.getApplication ()).getAppComponent ();
         }
+        if (mPresenter == null) {
+            mPresenter = obtainPresenter ();
+        }
+
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
-        if (mPresenter == null) {
-            mPresenter = obtainPresenter ();
-        }
         if (appComponent == null) {
             appComponent = ((IApp) this.getApplication ()).getAppComponent ();
+        }
+        if (mPresenter == null) {
+            mPresenter = obtainPresenter ();
         }
     }
 

@@ -16,4 +16,12 @@ public class Lesson {
     private int periods;//培训期数
     private int trainState;// 是否完. 0: 未完成; 1: 部分完成; 2: 全部完成
     private boolean lastLearn;//是否为最后一次学习
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

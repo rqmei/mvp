@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
 
     @Override
     public CommonPresenter obtainPresenter() {
-        return new CommonPresenter (((IApp) getApplication ()).getAppComponent ());
+        return new CommonPresenter (appComponent);
     }
 
     @Override

@@ -9,7 +9,7 @@ package com.timingbar.android.safe.app;
  */
 
 public class ApiConfig {
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
     /**
      * 项目连接服务端域名
      */
@@ -25,5 +25,5 @@ public class ApiConfig {
     /**
      * 获取视频章
      */
-    public static final String GET_LESSON_PHASE = "/find/train/lesson/phase/";
+    public static final String GET_LESSON_PHASE = "find/train/lesson/phase/";
 }

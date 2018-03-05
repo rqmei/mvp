@@ -3,6 +3,7 @@ package com.timingbar.android.safe.safe.presenter;
 import com.timingbar.android.safe.app.utils.BaseJson;
 import com.timingbar.android.safe.safe.control.UserControl;
 import com.timingbar.android.safe.safe.modle.CommonRepository;
+import com.timingbar.android.safe.safe.modle.entity.Lesson;
 import com.timingbar.android.safe.safe.modle.entity.VersionCode;
 import com.timingbar.safe.library.di.component.IAppComponent;
 import com.timingbar.safe.library.mvp.BasePresenter;
@@ -14,6 +15,8 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 import timber.log.Timber;
+
+import java.util.List;
 
 /**
  * CommonPresenter
@@ -82,4 +85,32 @@ public class CommonPresenter extends BasePresenter<CommonRepository> {
         });
     }
 
+    /**
+     * 获取视频章
+     */
+    public void getLsssonPhase(Message message) {
+        mModel.getLessonPhase ().subscribeOn (Schedulers.io ())
+                .retryWhen (new RetryWithDelay (3, 2))
+                .doOnSubscribe (disposable -> {
+                    addDispose (disposable);
+                    message.getTarget ().showLoading ();
+                }).subscribeOn (AndroidSchedulers.mainThread ())
+                .observeOn (AndroidSchedulers.mainThread ())
+                .doAfterTerminate (() -> {
+                    //请求完成隐藏加载框
+                    message.getTarget ().hideLoading ();
+                }).subscribe (new ErrorHandleSubscriber<BaseJson<List<Lesson>>> (mErrorHandler) {
+            @Override
+            public void onNext(BaseJson<List<Lesson>> listBaseJson) {
+                if (listBaseJson.getData () != null) {
+                    Timber.i ("进入onNext...." + listBaseJson.getData ().size ());
+                }
+                if (listBaseJson.isSuccess ()) {
+                    message.what = 2;
+                    message.obj = listBaseJson.getData ();
+                    message.HandleMessageToTargetUnrecycle ();
+                }
+            }
+        });
+    }
 }
