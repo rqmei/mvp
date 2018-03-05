@@ -1,11 +1,8 @@
 package com.timingbar.android.safe.app;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.ParseException;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -104,6 +101,7 @@ public class GlobalConfiguration implements IConfigModule {
             } else if (t instanceof JsonParseException || t instanceof ParseException || t instanceof JSONException || t instanceof JsonIOException) {
                 msg = "数据解析错误";
             }
+
             //  UiUtils.snackbarText (msg);
         }).gsonConfiguration ((context1, gsonBuilder) -> {
             gsonBuilder.serializeNulls ()//支持序列化null的参数

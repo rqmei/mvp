@@ -54,7 +54,8 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
         imageLoader.loadImage (this, GlideImageConfig.builder ().url (DataHelper.getAssetsImg ("image/1.jpg")).imageView (image).build ());
         imageLoader.loadImage (this, GlideImageConfig.builder ().imageView (bg4).placeholder (R.mipmap.ic_launcher).transformationType (1).url ("http://ww1.sinaimg.cn/mw600/6345d84ejw1dvxp9dioykg.gif").build ());
         if (mPresenter != null) {
-            mPresenter.getVersionCode (Message.obtain (this));
+            //  mPresenter.getVersionCode (Message.obtain (this));
+            mPresenter.getVersionCode (this);
         }
     }
 
@@ -92,5 +93,10 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
                 appComponent.appManager ().startActivity (Test1Activity.class);
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess() {
+        Toast.makeText (this, "main onSuccess......", Toast.LENGTH_SHORT).show ();
     }
 }

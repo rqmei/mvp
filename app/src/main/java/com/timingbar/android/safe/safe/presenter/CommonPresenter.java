@@ -1,6 +1,7 @@
 package com.timingbar.android.safe.safe.presenter;
 
 import com.timingbar.android.safe.app.utils.BaseJson;
+import com.timingbar.android.safe.safe.control.UserControl;
 import com.timingbar.android.safe.safe.modle.CommonRepository;
 import com.timingbar.android.safe.safe.modle.entity.VersionCode;
 import com.timingbar.safe.library.di.component.IAppComponent;
@@ -41,9 +42,9 @@ public class CommonPresenter extends BasePresenter<CommonRepository> {
     /**
      * 获取服务器版本号
      *
-     * @param msg
+     * @param view
      */
-    public void getVersionCode(final Message msg) {
+    public void getVersionCode(UserControl.View view) {
         mModel.getVersionCode ()
                 .subscribeOn (Schedulers.io ())
                 .retryWhen (new RetryWithDelay (3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
@@ -51,25 +52,30 @@ public class CommonPresenter extends BasePresenter<CommonRepository> {
                     //在订阅时必须调用这个方法,不然Activity退出时可能内存泄漏
                     addDispose (disposable);
                     //发送请求，显示加载框
-                    msg.getTarget ().showLoading ();
+                    view.showLoading ();
                 }).subscribeOn (AndroidSchedulers.mainThread ())
                 .observeOn (AndroidSchedulers.mainThread ())
                 .doAfterTerminate (() -> {
                     //请求完成隐藏加载框
-                    msg.getTarget ().hideLoading ();
+                    view.hideLoading ();
                 }).subscribe (new ErrorHandleSubscriber<BaseJson<VersionCode>> (mErrorHandler) {
             @Override
             public void onNext(@NonNull BaseJson<VersionCode> loginResultInfo) {
                 Timber.i ("进入onNext...." + loginResultInfo.getData ().getName ());
                 if (loginResultInfo.isSuccess ()) {
+                    view.onSuccess ();
                     //服务器返回标识成功
+                    Message msg = new Message ();
                     msg.what = 2;
                     msg.obj = loginResultInfo.getData ().toString ();
-                    msg.HandleMessageToTargetUnrecycle ();
+                    // msg.HandleMessageToTargetUnrecycle ();
+                    view.handleMessage (msg);
                 } else {
                     //服务器返回标识失败
+                    Message msg = new Message ();
                     msg.what = 3;
-                    msg.HandleMessageToTargetUnrecycle ();
+                    //   msg.HandleMessageToTargetUnrecycle ();
+                    view.handleMessage (msg);
                 }
             }
 

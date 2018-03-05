@@ -96,6 +96,9 @@ dependencies {
     compile rootProject.ext.dependencies["gson"]
     //解耦组建
     compile rootProject.ext.dependencies["eventbus"]
+    //数据库
+    compile rootProject.ext.dependencies["ormlite-android"]
+    compile rootProject.ext.dependencies["ormlite-core"]
 
     //View
     compile(rootProject.ext.dependencies["butterknife"]) {

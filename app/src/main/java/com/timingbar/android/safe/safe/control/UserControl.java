@@ -12,6 +12,7 @@ import com.timingbar.safe.library.mvp.IView;
 
 public interface UserControl {
     interface View extends IView {
+        void onSuccess();
     }
 
     interface Modle extends IModel {

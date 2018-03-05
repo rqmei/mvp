@@ -22,4 +22,8 @@ public class ApiConfig {
      * 获取服务器的版本号
      */
     public static final String GET_VERSION_CODE = "version/";
+    /**
+     * 获取视频章
+     */
+    public static final String GET_LESSON_PHASE = "/find/train/lesson/phase/";
 }

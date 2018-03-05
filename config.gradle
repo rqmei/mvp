@@ -59,6 +59,8 @@ ext {
             "dagger2-compiler"          : "com.google.dagger:dagger-compiler:${version["dagger2SdkVersion"]}",
             "gson"                      : "com.google.code.gson:gson:${version["gson"]}",//json解析工具类
             "eventbus"                  : "org.greenrobot:eventbus:3.0.0",//主要功能是替代Intent,Handler,BroadCast在Fragment，Activity，Service，线程之间传递消息.优点是开销小，代码更优雅。以及将发送者和接收者解耦。
+            "ormlite-android"           : "com.j256.ormlite:ormlite-android:5.0",
+            "ormlite-core"              : "com.j256.ormlite:ormlite-core:5.0",
 
             //view
             "butterknife"               : "com.jakewharton:butterknife:${version["butterknife"]}",

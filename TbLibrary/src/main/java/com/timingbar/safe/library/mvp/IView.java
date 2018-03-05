@@ -32,4 +32,5 @@ public interface IView {
      * @param message
      */
     void handleMessage(Message message);
+
 }
