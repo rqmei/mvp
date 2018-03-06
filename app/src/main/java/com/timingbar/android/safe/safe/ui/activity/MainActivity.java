@@ -86,11 +86,14 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
         Timber.i ("main handleMessage=" + message.obj);
     }
 
-    @OnClick(R.id.bg4)
+    @OnClick({R.id.bg4, R.id.image})
     public void onViewClicked(View v) {
         switch (v.getId ()) {
             case R.id.bg4://
                 appComponent.appManager ().startActivity (Test1Activity.class);
+                break;
+            case R.id.image:
+                appComponent.appManager ().startActivity (LoadeMoreActivity.class);
                 break;
         }
     }

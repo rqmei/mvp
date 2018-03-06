@@ -42,12 +42,11 @@ public class Test2Activity extends BaseActivity {
             User user = new User ("张三------->" + i);
             users.add (user);
         }
-        singleAdapter = new SingleAdapter (this, appComponent.imageLoader ());
+        singleAdapter = new SingleAdapter (this, appComponent.imageLoader (), users);
         //注意 必须设置layoutManager,不设置会导致不显示数据
         rvTest1.setLayoutManager (new LinearLayoutManager (this));
         //设置横向分割线
         rvTest1.addItemDecoration (new RecycleViewDivider (this, LinearLayoutManager.HORIZONTAL));
-        singleAdapter.addDataAll (users);
         Timber.i ("test2Activity----" + users.size () + "," + singleAdapter.getItemCount ());
         rvTest1.setAdapter (singleAdapter);
         singleAdapter.setOnItemClickListener (new MultiItemTypeAdapter.OnItemClickListener () {

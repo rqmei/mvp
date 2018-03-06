@@ -10,6 +10,8 @@ import com.timingbar.safe.library.view.recyclerview.adapter.CommonAdapter;
 import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 import timber.log.Timber;
 
+import java.util.List;
+
 
 /**
  * SingleAdapter
@@ -23,8 +25,8 @@ public class SingleAdapter extends CommonAdapter<User> {
     Context mContext;
     ImageLoader imageLoader;
 
-    public SingleAdapter(Context context, ImageLoader imageLoader) {
-        super (context, R.layout.item_single);
+    public SingleAdapter(Context context, ImageLoader imageLoader, List<User> users) {
+        super (context, R.layout.item_single, users);
         this.mContext = context;
         this.imageLoader = imageLoader;
     }
