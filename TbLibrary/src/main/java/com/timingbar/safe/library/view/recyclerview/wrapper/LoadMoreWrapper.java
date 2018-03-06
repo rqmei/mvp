@@ -44,10 +44,13 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
     private View mNoMoreView;
     //加载更多的LayoutId
     private int mNoMoreLayoutId;
-
+    //当前状态（默认加载更多）
     private int mCurrentItemType = ITEM_TYPE_LOAD_MORE_VIEW;
+    //滑动到底部自动加载更多的事件
     private LoadMoreScrollListener mLoadMoreScrollListener;
-    private boolean isLoadError = false;//标记是否加载出错
+    //标记是否加载出错
+    private boolean isLoadError = false;
+    //标记是否有相关状态提示的底部view
     private boolean isHaveStatesView = true;
 
     public LoadMoreWrapper(RecyclerView.Adapter adapter) {

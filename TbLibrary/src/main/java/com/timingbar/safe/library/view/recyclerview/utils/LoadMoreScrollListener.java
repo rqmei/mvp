@@ -26,9 +26,9 @@ public abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListen
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged (recyclerView, newState);
-        if (recyclerView.getLayoutManager () instanceof LinearLayoutManager)
+        if (recyclerView.getLayoutManager () instanceof LinearLayoutManager) {
             lm = (LinearLayoutManager) recyclerView.getLayoutManager ();
-        else if (recyclerView.getLayoutManager () instanceof StaggeredGridLayoutManager) {
+        } else if (recyclerView.getLayoutManager () instanceof StaggeredGridLayoutManager) {
             sm = (StaggeredGridLayoutManager) recyclerView.getLayoutManager ();
             lastPositions = sm.findLastVisibleItemPositions (null);
         }
