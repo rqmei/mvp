@@ -1,18 +1,15 @@
 package com.timingbar.safe.library.view.recyclerview.wrapper;
 
-import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 import com.timingbar.safe.library.view.recyclerview.utils.LoadMoreScrollListener;
 import com.timingbar.safe.library.view.recyclerview.utils.WrapperUtils;
-import timber.log.Timber;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -20,7 +17,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 /**
  * LoadMoreWrapper
  * -----------------------------------------------------------------------------------------------------------------------------------
- * 加载更多
+ * 自动加载更多，有加载中、加载出错、加载完成3中状态，每种状态的ui可以自己自定义
  *
  * @author rqmei on 2018/2/28
  */
