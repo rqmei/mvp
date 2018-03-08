@@ -19,8 +19,9 @@ import com.timingbar.safe.library.view.recyclerview.utils.WrapperUtils;
 public class HeaderAndFooterWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int BASE_ITEM_TYPE_HEADER = 100000;
     private static final int BASE_ITEM_TYPE_FOOTER = 200000;
-
+    //头部View
     private SparseArrayCompat<View> mHeaderViews = new SparseArrayCompat<> ();
+    //底部View
     private SparseArrayCompat<View> mFootViews = new SparseArrayCompat<> ();
 
     private RecyclerView.Adapter mInnerAdapter;

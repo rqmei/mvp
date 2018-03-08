@@ -16,12 +16,17 @@ public abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListen
 
 
     private int previousTotal;
+    //控制不要重复加载更多 
     private boolean isLoading = true;
     private LinearLayoutManager lm;
     private StaggeredGridLayoutManager sm;
     private int[] lastPositions;
+    //item总数量 
     private int totalItemCount;
+    //屏幕上最后一个可见item位置位置,只显示部分也算 
     private int lastVisibleItemPosition;
+    ///可见item总数量,只显示了部分也算可见 
+    private int visibleItemCount;
 
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -33,10 +38,11 @@ public abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListen
             lastPositions = sm.findLastVisibleItemPositions (null);
         }
 
-        int visibleItemCount = recyclerView.getChildCount ();
+        visibleItemCount = recyclerView.getChildCount ();
         if (lm != null) {
             totalItemCount = lm.getItemCount ();
             lastVisibleItemPosition = lm.findLastVisibleItemPosition ();
+            //  visibleItemCount = lm.getChildCount ();
         } else if (sm != null) {
             totalItemCount = sm.getItemCount ();
             lastVisibleItemPosition = lastPositions[0];
@@ -55,7 +61,7 @@ public abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListen
 
 
         }
-        if (!isLoading && visibleItemCount > 0 && totalItemCount - 1 == lastVisibleItemPosition && recyclerView.getScrollState () == RecyclerView.SCROLL_STATE_IDLE) {
+        if (!isLoading && visibleItemCount > 0 && totalItemCount - 1 == lastVisibleItemPosition && totalItemCount > visibleItemCount && recyclerView.getScrollState () == RecyclerView.SCROLL_STATE_IDLE) {
             loadMore ();
         }
 

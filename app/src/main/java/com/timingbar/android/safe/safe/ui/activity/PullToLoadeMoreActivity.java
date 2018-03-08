@@ -1,9 +1,9 @@
 package com.timingbar.android.safe.safe.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 import butterknife.BindView;
 import com.timingbar.android.safe.R;
 import com.timingbar.android.safe.safe.modle.entity.User;
@@ -17,29 +17,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * LoadeMoreActivity
+ * PullToLoadeMoreActivity
  * -----------------------------------------------------------------------------------------------------------------------------------
- * 分页点击加载更多
+ * 上下拉刷新
  *
- * @author rqmei on 2018/3/6
+ * @author rqmei on 2018/3/7
  */
 
-public class LoadeMoreActivity extends BaseActivity {
-    @BindView(R.id.btn1)
-    Button btn1;
+public class PullToLoadeMoreActivity extends BaseActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
     LoadMoreWrapper mLoadMoreWrapper;
     List<User> users = new ArrayList<> ();
 
     @Override
     public int getLayoutResId() {
-        return R.layout.test1;
+        return R.layout.pull_to_loade_more;
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             User user = new User ("张三------->" + i);
             users.add (user);
         }
@@ -53,29 +53,37 @@ public class LoadeMoreActivity extends BaseActivity {
                 Timber.i ("LoadeMoreActivity onRetry------>");
                 User user = new User ("李四-->loadMore");
                 users.add (user);
-                mLoadMoreWrapper.notifyDataSetChanged ();
+                mLoadMoreWrapper.showLoadComplete ();
             }
 
             @Override
             public void onLoadMore() {
-                mLoadMoreWrapper.setShowFootView (true);
-                Timber.i ("LoadeMoreActivity onLoadMore------>");
-                //                User user = new User ("李四-->loadMore");
-                //                users.add (user);
-                //                if (recyclerView.getScrollState () == RecyclerView.SCROLL_STATE_IDLE) {
-                //                    mLoadMoreWrapper.notifyDataSetChanged ();
-                //                }
-                //mLoadMoreWrapper.showLoadComplete ();
-                //                mLoadMoreWrapper.showLoadMore ();
-                mLoadMoreWrapper.showLoadError ();
+                mLoadMoreWrapper.showLoadMore ();
+                User user = new User ("李四-->loadMore");
+                users.add (user);
+                mLoadMoreWrapper.notifyDataSetChanged ();
             }
         });
         recyclerView.setAdapter (mLoadMoreWrapper);
+        // 设置手指在屏幕下拉多少距离会触发下拉刷新
+        swipeRefresh.setDistanceToTriggerSync (300);
+        swipeRefresh.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
+            @Override
+            public void onRefresh() {
+                mLoadMoreWrapper.setShowFootView (false);
+                swipeRefresh.setRefreshing (false);
+                users.clear ();
+                for (int i = 0; i < 8; i++) {
+                    User user = new User ("王五-->onRefresh" + i);
+                    users.add (user);
+                }
+                mLoadMoreWrapper.notifyDataSetChanged ();
+            }
+        });
     }
 
     @Override
     public IPresenter obtainPresenter() {
         return null;
     }
-
 }

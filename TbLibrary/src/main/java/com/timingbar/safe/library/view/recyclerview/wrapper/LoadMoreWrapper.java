@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 import com.timingbar.safe.library.view.recyclerview.utils.LoadMoreScrollListener;
 import com.timingbar.safe.library.view.recyclerview.utils.WrapperUtils;
+import timber.log.Timber;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -52,6 +53,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
     private boolean isLoadError = false;
     //标记是否有相关状态提示的底部view
     private boolean isHaveStatesView = true;
+    private boolean isShowFootView = false;
 
     public LoadMoreWrapper(RecyclerView.Adapter adapter) {
         this.mInnerAdapter = adapter;
@@ -60,7 +62,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
             public void loadMore() {
                 if (mOnLoadListener != null && isHaveStatesView) {
                     if (!isLoadError) {
-                        showLoadMore ();
+                        // showLoadMore ();
                         mOnLoadListener.onLoadMore ();
                     }
                 }
@@ -75,6 +77,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
         mCurrentItemType = ITEM_TYPE_LOAD_MORE_VIEW;
         isLoadError = false;
         isHaveStatesView = true;
+        isShowFootView = true;
         notifyItemChanged (getItemCount ());
     }
 
@@ -85,6 +88,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
         mCurrentItemType = ITEM_TYPE_LOAD_FAILED_VIEW;
         isLoadError = true;
         isHaveStatesView = true;
+        isShowFootView = true;
         notifyItemChanged (getItemCount ());
     }
 
@@ -95,6 +99,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
         mCurrentItemType = ITEM_TYPE_NO_MORE_VIEW;
         isLoadError = false;
         isHaveStatesView = true;
+        isShowFootView = true;
         notifyItemChanged (getItemCount ());
     }
 
@@ -146,11 +151,15 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Timber.i ("onCreateViewHolder====");
         if (viewType == ITEM_TYPE_NO_MORE_VIEW) {
+            Timber.i ("onCreateViewHolder 1====");
             return getViewHolder (parent, mNoMoreLayoutId, mNoMoreView, "--end--");
         } else if (viewType == ITEM_TYPE_LOAD_MORE_VIEW) {
+            Timber.i ("onCreateViewHolder 2====");
             return getViewHolder (parent, mLoadMoreLayoutId, mLoadMoreView, "正在加载中");
         } else if (viewType == ITEM_TYPE_LOAD_FAILED_VIEW) {
+            Timber.i ("onCreateViewHolder 3====");
             return getViewHolder (parent, mLoadMoreFailedLayoutId, mLoadMoreFailedView, "加载失败，请点我重试");
         }
         return mInnerAdapter.onCreateViewHolder (parent, viewType);
@@ -158,22 +167,33 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType () == ITEM_TYPE_LOAD_FAILED_VIEW) {
-            //加载失败
-            holder.itemView.setOnClickListener (new View.OnClickListener () {
-                @Override
-                public void onClick(View v) {
-                    if (mOnLoadListener != null) {
-                        //重新加载更多
-                        mOnLoadListener.onRetry ();
-                        showLoadMore ();
+        Timber.i ("onBindViewHolder====");
+        if (isFooterType (holder.getItemViewType ())) {
+            //底部View相关逻辑处理
+            if (!isShowFootView) {
+                holder.itemView.setVisibility (View.GONE);
+                return;
+            } else {
+                holder.itemView.setVisibility (View.VISIBLE);
+            }
+            if (holder.getItemViewType () == ITEM_TYPE_LOAD_FAILED_VIEW) {
+                //加载失败
+                holder.itemView.setOnClickListener (new View.OnClickListener () {
+                    @Override
+                    public void onClick(View v) {
+                        if (mOnLoadListener != null) {
+                            //重新加载更多
+                            mOnLoadListener.onRetry ();
+                            showLoadMore ();
+                        }
                     }
-                }
-            });
-            return;
+                });
+                return;
+            }
         }
-        if (!isFooterType (holder.getItemViewType ()))
+        if (!isFooterType (holder.getItemViewType ())) {
             mInnerAdapter.onBindViewHolder (holder, position);
+        }
     }
 
     @Override
@@ -290,6 +310,10 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         //加载更多
         void onLoadMore();
+    }
+
+    public void setShowFootView(boolean showFootView) {
+        isShowFootView = showFootView;
     }
 
     private OnLoadListener mOnLoadListener;

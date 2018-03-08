@@ -30,6 +30,7 @@
         <activity android:name=".safe.ui.activity.Test1Activity"/>
         <activity android:name=".safe.ui.activity.Test2Activity"/>
         <activity android:name=".safe.ui.activity.LoadeMoreActivity"/>
+        <activity android:name=".safe.ui.activity.PullToLoadeMoreActivity"/>
     </application>
 
 </manifest>
