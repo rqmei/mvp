@@ -21,9 +21,11 @@ import java.util.List;
 
 public class MultiAdapter extends MultiItemTypeAdapter<NewsItem> {
     ImageLoader imageLoader;
+    Context mContext;
 
     public MultiAdapter(Context context, ImageLoader imageLoader, List<NewsItem> datas) {
         super (context, datas);
+        this.mContext = context;
         this.imageLoader = imageLoader;
         addItemViewDelegate (new TodayTopicDelegate ());
         addItemViewDelegate (new NormalNewsViewDelegate ());
@@ -79,7 +81,7 @@ public class MultiAdapter extends MultiItemTypeAdapter<NewsItem> {
             if (item.getImgs () != null || !item.getImgs ().get (0).equals ("")) {//是否有图
                 holder.getView (R.id.img_news_image).setVisibility (View.VISIBLE);
                 String url = item.getImgs ().get (0);
-                holder.setImageUrl (imageLoader, R.id.img_news_image, url);
+                holder.setImageUrl (mContext, imageLoader, R.id.img_news_image, url);
 
             } else {
                 holder.getView (R.id.img_news_image).setVisibility (View.GONE);

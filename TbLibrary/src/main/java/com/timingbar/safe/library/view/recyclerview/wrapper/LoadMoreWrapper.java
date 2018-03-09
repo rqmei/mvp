@@ -135,7 +135,7 @@ public class LoadMoreWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((TextView) view).setText (msg);
                 ((TextView) view).setGravity (Gravity.CENTER);
             }
-            holder = ViewHolder.createViewHolder (parent.getContext (), view);
+            holder = ViewHolder.createViewHolder (view);
         }
         return holder;
     }

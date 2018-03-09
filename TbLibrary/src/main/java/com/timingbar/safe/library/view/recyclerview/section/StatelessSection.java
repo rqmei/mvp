@@ -3,6 +3,7 @@ package com.timingbar.safe.library.view.recyclerview.section;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 
 /**
  * StatelessSection
@@ -78,32 +79,42 @@ public abstract class StatelessSection extends Section {
     }
 
     @Override
-    public final void onBindLoadingViewHolder(RecyclerView.ViewHolder holder) {
+    public final void onBindLoadingViewHolder(ViewHolder holder) {
         super.onBindLoadingViewHolder (holder);
     }
 
     @Override
-    public final RecyclerView.ViewHolder getLoadingViewHolder(View view) {
+    public final ViewHolder getLoadingViewHolder(View view) {
         return super.getLoadingViewHolder (view);
     }
 
     @Override
-    public final void onBindFailedViewHolder(RecyclerView.ViewHolder holder) {
+    public final void onBindFailedViewHolder(ViewHolder holder) {
         super.onBindFailedViewHolder (holder);
     }
 
     @Override
-    public final RecyclerView.ViewHolder getFailedViewHolder(View view) {
+    public final ViewHolder getFailedViewHolder(View view) {
         return super.getFailedViewHolder (view);
     }
 
     @Override
-    public final void onBindEmptyViewHolder(RecyclerView.ViewHolder holder) {
+    public final void onBindEmptyViewHolder(ViewHolder holder) {
         super.onBindEmptyViewHolder (holder);
     }
 
     @Override
-    public final RecyclerView.ViewHolder getEmptyViewHolder(View view) {
+    public final ViewHolder getEmptyViewHolder(View view) {
         return super.getEmptyViewHolder (view);
+    }
+
+    @Override
+    public void onBindItemViewHolder(ViewHolder holder, int position) {
+        super.onBindItemViewHolder (holder, position);
+    }
+
+    @Override
+    public ViewHolder getItemViewHolder(View view) {
+        return super.getItemViewHolder (view);
     }
 }

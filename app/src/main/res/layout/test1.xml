@@ -9,9 +9,5 @@
             android:text="跳转下一个页面"
             android:id="@+id/btn1"
     />
-    <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recycler_view"
-    />
+    <include layout="@layout/recycler_view"/>
 </LinearLayout>

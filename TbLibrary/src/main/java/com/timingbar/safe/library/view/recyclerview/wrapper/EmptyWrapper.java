@@ -35,7 +35,7 @@ public class EmptyWrapper<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (isEmpty ()) {
             ViewHolder holder;
             if (mEmptyView != null) {
-                holder = ViewHolder.createViewHolder (parent.getContext (), mEmptyView);
+                holder = ViewHolder.createViewHolder (mEmptyView);
             } else {
                 holder = ViewHolder.createViewHolder (parent.getContext (), parent, mEmptyLayoutId);
             }

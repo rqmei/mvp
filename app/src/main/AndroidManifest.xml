@@ -10,7 +10,7 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
 
         <!-- glide配置 -->
         <meta-data
@@ -31,6 +31,7 @@
         <activity android:name=".safe.ui.activity.Test2Activity"/>
         <activity android:name=".safe.ui.activity.LoadeMoreActivity"/>
         <activity android:name=".safe.ui.activity.PullToLoadeMoreActivity"/>
+        <activity android:name=".safe.ui.activity.SectionActivity"/>
     </application>
 
 </manifest>

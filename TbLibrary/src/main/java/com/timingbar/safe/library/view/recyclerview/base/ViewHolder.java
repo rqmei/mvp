@@ -28,11 +28,9 @@ import com.timingbar.safe.library.view.imageloader.glide.GlideImageConfig;
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
-    private Context mContext;
 
-    public ViewHolder(Context context, View itemView) {
+    public ViewHolder(View itemView) {
         super (itemView);
-        mContext = context;
         mConvertView = itemView;
         mViews = new SparseArray<View> ();
     }
@@ -40,19 +38,18 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * 创建新View，被LayoutManager所调用
      *
-     * @param context
      * @param itemView
      * @return
      */
-    public static ViewHolder createViewHolder(Context context, View itemView) {
-        ViewHolder holder = new ViewHolder (context, itemView);
+    public static ViewHolder createViewHolder(View itemView) {
+        ViewHolder holder = new ViewHolder (itemView);
         return holder;
     }
 
     public static ViewHolder createViewHolder(Context context, ViewGroup parent, int layoutId) {
         View itemView = LayoutInflater.from (context).inflate (layoutId, parent,
                 false);
-        ViewHolder holder = new ViewHolder (context, itemView);
+        ViewHolder holder = new ViewHolder (itemView);
         return holder;
     }
 
@@ -105,7 +102,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * @param url         图片的路径
      * @return
      */
-    public ViewHolder setImageUrl(ImageLoader imageLoader, int viewId, String url) {
+    public ViewHolder setImageUrl(Context mContext, ImageLoader imageLoader, int viewId, String url) {
         ImageView view = getView (viewId);
         imageLoader.loadImage (mContext, GlideImageConfig.builder ().imageView (view).transformationType (0).isClearMemory (true).isClearDiskCache (true).url (url).build ());
         return this;
@@ -141,7 +138,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public ViewHolder setTextColorRes(int viewId, int textColorRes) {
+    public ViewHolder setTextColorRes(Context mContext, int viewId, int textColorRes) {
         TextView view = getView (viewId);
         view.setTextColor (mContext.getResources ().getColor (textColorRes));
         return this;

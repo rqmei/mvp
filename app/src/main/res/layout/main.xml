@@ -25,9 +25,10 @@
                   android:id="@+id/bg2"
                   android:orientation="horizontal"
     />
-    <TextView android:layout_width="match_parent"
+    <Button android:layout_width="match_parent"
               android:layout_height="50dp"
               android:id="@+id/bg3"
+              android:text="Section..."
     />
     <ImageView android:layout_width="match_parent"
                android:layout_height="50dp"

@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.timingbar.safe.library.base.delegate.IFragment;
 import com.timingbar.safe.library.mvp.IPresenter;
 
@@ -20,6 +22,7 @@ import com.timingbar.safe.library.mvp.IPresenter;
 
 public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment<P> {
     protected P mPresenter;
+    Unbinder unbinder;
 
     public BaseFragment() {
         //必须确保在Fragment实例化时setArguments()
@@ -29,7 +32,18 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return initView (inflater, container, savedInstanceState);
+        View rootView = initView (inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind (this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated (savedInstanceState);
+        initData (savedInstanceState);
+        if (mPresenter == null) {
+            mPresenter = obtainPresenter ();
+        }
     }
 
     @Override
@@ -58,5 +72,11 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
     @Override
     public boolean useEventBus() {
         return true;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView ();
+        unbinder.unbind ();
     }
 }

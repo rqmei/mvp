@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
     @BindView(R.id.bg2)
     LinearLayout bg2;
     @BindView(R.id.bg3)
-    TextView bg3;
+    Button bg3;
     @BindView(R.id.bg4)
     ImageView bg4;
     @BindView(R.id.bg5)
@@ -48,13 +48,11 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        // appComponent = ((IApp) this.getApplicationContext ()).getAppComponent ();
         imageLoader = appComponent.imageLoader ();
         imageLoader.loadImage (this, GlideImageConfig.builder ().url ("http://pic14.nipic.com/20110607/6776092_111031284000_2.jpg").bgView (main).transformationType (3).placeholder (R.mipmap.ic_launcher).build ());
         imageLoader.loadImage (this, GlideImageConfig.builder ().url (DataHelper.getAssetsImg ("image/1.jpg")).imageView (image).build ());
         imageLoader.loadImage (this, GlideImageConfig.builder ().imageView (bg4).placeholder (R.mipmap.ic_launcher).transformationType (1).url ("http://ww1.sinaimg.cn/mw600/6345d84ejw1dvxp9dioykg.gif").build ());
         if (mPresenter != null) {
-            //  mPresenter.getVersionCode (Message.obtain (this));
             mPresenter.getVersionCode (this);
         }
     }
@@ -86,7 +84,7 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
         Timber.i ("main handleMessage=" + message.obj);
     }
 
-    @OnClick({R.id.bg4, R.id.image, R.id.tv_show_msg})
+    @OnClick({R.id.bg4, R.id.image, R.id.tv_show_msg, R.id.bg3})
     public void onViewClicked(View v) {
         switch (v.getId ()) {
             case R.id.bg4://
@@ -97,6 +95,9 @@ public class MainActivity extends BaseActivity<CommonPresenter> implements UserC
                 break;
             case R.id.tv_show_msg:
                 appComponent.appManager ().startActivity (PullToLoadeMoreActivity.class);
+                break;
+            case R.id.bg3:
+                appComponent.appManager ().startActivity (SectionActivity.class);
                 break;
         }
     }

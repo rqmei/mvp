@@ -1,8 +1,8 @@
 package com.timingbar.safe.library.view.recyclerview.section;
 
 import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 
 /**
  * Section
@@ -263,7 +263,7 @@ public abstract class Section {
      * @param holder   ViewHolder for the Content of this Section
      * @param position position of the item in the Section, not in the RecyclerView
      */
-    public final void onBindContentViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public final void onBindContentViewHolder(ViewHolder holder, int position) {
         switch (state) {
             case LOADING:
                 onBindLoadingViewHolder (holder);
@@ -324,7 +324,7 @@ public abstract class Section {
      * @param view View inflated by resource returned by getHeaderResourceId
      * @return ViewHolder for the Header of this Section
      */
-    public RecyclerView.ViewHolder getHeaderViewHolder(View view) {
+    public ViewHolder getHeaderViewHolder(View view) {
         return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
     }
 
@@ -333,7 +333,7 @@ public abstract class Section {
      *
      * @param holder ViewHolder for the Header of this Section
      */
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
+    public void onBindHeaderViewHolder(ViewHolder holder) {
         // Nothing to bind here.
     }
 
@@ -343,7 +343,7 @@ public abstract class Section {
      * @param view View inflated by resource returned by getFooterResourceId
      * @return ViewHolder for the Footer of this Section
      */
-    public RecyclerView.ViewHolder getFooterViewHolder(View view) {
+    public ViewHolder getFooterViewHolder(View view) {
         return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
     }
 
@@ -352,7 +352,7 @@ public abstract class Section {
      *
      * @param holder ViewHolder for the Footer of this Section
      */
-    public void onBindFooterViewHolder(RecyclerView.ViewHolder holder) {
+    public void onBindFooterViewHolder(ViewHolder holder) {
         // Nothing to bind here.
     }
 
@@ -362,7 +362,11 @@ public abstract class Section {
      * @param view View inflated by resource returned by getItemResourceId
      * @return ViewHolder for the Item of this Section
      */
-    public abstract RecyclerView.ViewHolder getItemViewHolder(View view);
+    public ViewHolder getItemViewHolder(View view) {
+        return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
+    }
+
+    ;
 
     /**
      * Bind the data to the ViewHolder for an Item of this Section
@@ -370,7 +374,11 @@ public abstract class Section {
      * @param holder   ViewHolder for the Item of this Section
      * @param position position of the item in the Section, not in the RecyclerView
      */
-    public abstract void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position);
+    public void onBindItemViewHolder(ViewHolder holder, int position) {
+        
+    }
+
+    ;
 
     /**
      * Return the ViewHolder for the Loading state of this Section
@@ -378,7 +386,7 @@ public abstract class Section {
      * @param view View inflated by resource returned by getItemResourceId
      * @return ViewHolder for the Loading state of this Section
      */
-    public RecyclerView.ViewHolder getLoadingViewHolder(View view) {
+    public ViewHolder getLoadingViewHolder(View view) {
         return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
     }
 
@@ -387,7 +395,7 @@ public abstract class Section {
      *
      * @param holder ViewHolder for the Loading state of this Section
      */
-    public void onBindLoadingViewHolder(RecyclerView.ViewHolder holder) {
+    public void onBindLoadingViewHolder(ViewHolder holder) {
         // Nothing to bind here.
     }
 
@@ -397,7 +405,7 @@ public abstract class Section {
      * @param view View inflated by resource returned by getItemResourceId
      * @return ViewHolder for the Failed of this Section
      */
-    public RecyclerView.ViewHolder getFailedViewHolder(View view) {
+    public ViewHolder getFailedViewHolder(View view) {
         return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
     }
 
@@ -406,7 +414,7 @@ public abstract class Section {
      *
      * @param holder ViewHolder for the Failed state of this Section
      */
-    public void onBindFailedViewHolder(RecyclerView.ViewHolder holder) {
+    public void onBindFailedViewHolder(ViewHolder holder) {
         // Nothing to bind here.
     }
 
@@ -416,7 +424,7 @@ public abstract class Section {
      * @param view View inflated by resource returned by getItemResourceId
      * @return ViewHolder for the Empty of this Section
      */
-    public RecyclerView.ViewHolder getEmptyViewHolder(View view) {
+    public ViewHolder getEmptyViewHolder(View view) {
         return new SectionedRecyclerViewAdapter.EmptyViewHolder (view);
     }
 
@@ -425,7 +433,7 @@ public abstract class Section {
      *
      * @param holder ViewHolder for the Empty state of this Section
      */
-    public void onBindEmptyViewHolder(RecyclerView.ViewHolder holder) {
+    public void onBindEmptyViewHolder(ViewHolder holder) {
         // Nothing to bind here.
     }
 }

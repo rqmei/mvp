@@ -26,14 +26,14 @@ import java.util.List;
  */
 
 public class Test2Activity extends BaseActivity {
-    @BindView(R.id.rv_test1)
-    RecyclerView rvTest1;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     SingleAdapter singleAdapter;
     List<User> users = new ArrayList<> ();
 
     @Override
     public int getLayoutResId() {
-        return R.layout.test2;
+        return R.layout.recycler_view;
     }
 
     @Override
@@ -44,11 +44,11 @@ public class Test2Activity extends BaseActivity {
         }
         singleAdapter = new SingleAdapter (this, appComponent.imageLoader (), users);
         //注意 必须设置layoutManager,不设置会导致不显示数据
-        rvTest1.setLayoutManager (new LinearLayoutManager (this));
+        recyclerView.setLayoutManager (new LinearLayoutManager (this));
         //设置横向分割线
-        rvTest1.addItemDecoration (new RecycleViewDivider (this, LinearLayoutManager.HORIZONTAL));
+        recyclerView.addItemDecoration (new RecycleViewDivider (this, LinearLayoutManager.HORIZONTAL));
         Timber.i ("test2Activity----" + users.size () + "," + singleAdapter.getItemCount ());
-        rvTest1.setAdapter (singleAdapter);
+        recyclerView.setAdapter (singleAdapter);
         singleAdapter.setOnItemClickListener (new MultiItemTypeAdapter.OnItemClickListener () {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, Object o, int position) {

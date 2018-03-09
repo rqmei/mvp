@@ -1,10 +1,12 @@
 package com.timingbar.safe.library.view.recyclerview.section;
 
+import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.timingbar.safe.library.view.recyclerview.base.ViewHolder;
 import io.reactivex.annotations.NonNull;
 
 import java.util.HashMap;
@@ -19,7 +21,7 @@ import java.util.UUID;
  * @author rqmei on 2018/2/28
  */
 
-public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     public final static int VIEW_TYPE_HEADER = 0;
     public final static int VIEW_TYPE_FOOTER = 1;
@@ -39,8 +41,8 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder viewHolder = null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ViewHolder viewHolder = null;
 
         for (Map.Entry<String, Integer> entry : sectionViewTypeNumbers.entrySet ()) {
             if (viewType >= entry.getValue () && viewType < entry.getValue () + VIEW_TYPE_QTY) {
@@ -82,14 +84,14 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return viewHolder;
     }
 
-    private RecyclerView.ViewHolder getItemViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getItemViewHolder(ViewGroup parent, Section section) {
         View view = LayoutInflater.from (parent.getContext ()).inflate (section.getItemResourceId (),
                 parent, false);
         // get the item viewholder from the section
         return section.getItemViewHolder (view);
     }
 
-    private RecyclerView.ViewHolder getHeaderViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getHeaderViewHolder(ViewGroup parent, Section section) {
         Integer resId = section.getHeaderResourceId ();
 
         if (resId == null)
@@ -100,7 +102,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return section.getHeaderViewHolder (view);
     }
 
-    private RecyclerView.ViewHolder getFooterViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getFooterViewHolder(ViewGroup parent, Section section) {
         Integer resId = section.getFooterResourceId ();
 
         if (resId == null)
@@ -111,7 +113,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return section.getFooterViewHolder (view);
     }
 
-    private RecyclerView.ViewHolder getLoadingViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getLoadingViewHolder(ViewGroup parent, Section section) {
         Integer resId = section.getLoadingResourceId ();
 
         if (resId == null)
@@ -122,7 +124,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return section.getLoadingViewHolder (view);
     }
 
-    private RecyclerView.ViewHolder getFailedViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getFailedViewHolder(ViewGroup parent, Section section) {
         Integer resId = section.getFailedResourceId ();
 
         if (resId == null)
@@ -133,7 +135,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return section.getFailedViewHolder (view);
     }
 
-    private RecyclerView.ViewHolder getEmptyViewHolder(ViewGroup parent, Section section) {
+    private ViewHolder getEmptyViewHolder(ViewGroup parent, Section section) {
         Integer resId = section.getEmptyResourceId ();
 
         if (resId == null)
@@ -197,7 +199,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
         int currentPos = 0;
 
@@ -1119,7 +1121,7 @@ public class SectionedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
      * Should be used to avoid the boilerplate of creating a ViewHolder class for simple case
      * scenarios.
      */
-    public static class EmptyViewHolder extends RecyclerView.ViewHolder {
+    public static class EmptyViewHolder extends ViewHolder {
         public EmptyViewHolder(View itemView) {
             super (itemView);
         }
