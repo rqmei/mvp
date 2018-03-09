@@ -19,12 +19,12 @@ import java.util.List;
  * @author rqmei on 2018/3/8
  */
 
-public class ContactsSection extends StatelessSection {
+public class HeaderSection extends StatelessSection {
     String title;
     List<String> list;
     Context mContext;
 
-    public ContactsSection(Context context, String title, List<String> list) {
+    public HeaderSection(Context context, String title, List<String> list) {
         super (new SectionParameters.Builder (R.layout.section_ex1_item).headerResourceId (R.layout.section_ex1_header).build ());
         this.mContext = context;
         this.title = title;
@@ -34,11 +34,6 @@ public class ContactsSection extends StatelessSection {
     @Override
     public int getContentItemsTotal() {
         return list == null ? -1 : list.size ();
-    }
-
-    @Override
-    public ViewHolder getItemViewHolder(View view) {
-        return super.getItemViewHolder (view);
     }
 
     @Override
@@ -55,10 +50,6 @@ public class ContactsSection extends StatelessSection {
         });
     }
 
-    @Override
-    public ViewHolder getHeaderViewHolder(View view) {
-        return super.getHeaderViewHolder (view);
-    }
 
     @Override
     public void onBindHeaderViewHolder(ViewHolder holder) {

@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.BindView;
 import com.timingbar.android.safe.R;
-import com.timingbar.android.safe.safe.ui.section.ContactsSection;
+import com.timingbar.android.safe.safe.ui.section.HeaderSection;
 import com.timingbar.safe.library.base.BaseFragment;
 import com.timingbar.safe.library.mvp.IPresenter;
 import com.timingbar.safe.library.view.recyclerview.section.SectionedRecyclerViewAdapter;
-import timber.log.Timber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class SectionHeaderFragment extends BaseFragment {
         for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
             List<String> contacts = getContactsWithLetter (alphabet);
             if (contacts.size () > 0) {
-                sectionAdapter.addSection (new ContactsSection (mContext, String.valueOf (alphabet), contacts));
+                sectionAdapter.addSection (new HeaderSection (mContext, String.valueOf (alphabet), contacts));
             }
         }
         recyclerView.setLayoutManager (new LinearLayoutManager (getContext ()));
