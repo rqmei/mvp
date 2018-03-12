@@ -17,6 +17,13 @@
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:id="@+id/tv_section_title"/>
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:id="@+id/iv_section_header_arrow"
+               android:layout_marginRight="16dp"
+               android:layout_centerVertical="true"
+    />
 
     <View
             android:layout_width="match_parent"

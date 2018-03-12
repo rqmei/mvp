@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import butterknife.BindView;
 import com.timingbar.android.safe.R;
+import com.timingbar.android.safe.safe.ui.activity.fragment.ExpandedFragment;
 import com.timingbar.android.safe.safe.ui.activity.fragment.SectionHeaderFooterFragment;
 import com.timingbar.android.safe.safe.ui.activity.fragment.SectionHeaderFragment;
 import com.timingbar.safe.library.base.BaseActivity;
@@ -72,22 +73,22 @@ public class SectionActivity extends BaseActivity implements NavigationView.OnNa
             case R.id.nav_section_header_footer:
                 replaceFragment (new SectionHeaderFooterFragment ());
                 break;
-            case R.id.nav_example3:
+            case R.id.section_header_footer:
                 replaceFragment (new SectionHeaderFragment ());
                 break;
-            case R.id.nav_example4:
+            case R.id.expandable_section:
+                replaceFragment (new ExpandedFragment ());
+                break;
+            case R.id.grid_section_header:
                 replaceFragment (new SectionHeaderFragment ());
                 break;
-            case R.id.nav_example5:
+            case R.id.grid_section:
                 replaceFragment (new SectionHeaderFragment ());
                 break;
-            case R.id.nav_example6:
+            case R.id.search_section:
                 replaceFragment (new SectionHeaderFragment ());
                 break;
-            case R.id.nav_example7:
-                replaceFragment (new SectionHeaderFragment ());
-                break;
-            case R.id.nav_example8:
+            case R.id.animations_section:
                 replaceFragment (new SectionHeaderFragment ());
                 break;
         }

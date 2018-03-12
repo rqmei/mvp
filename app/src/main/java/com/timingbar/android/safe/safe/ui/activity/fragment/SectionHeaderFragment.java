@@ -60,7 +60,7 @@ public class SectionHeaderFragment extends BaseFragment {
      * @param letter
      * @return
      */
-    private List<String> getContactsWithLetter(char letter) {
+    public List<String> getContactsWithLetter(char letter) {
         List<String> contacts = new ArrayList<> ();
         for (String contact : getResources ().getStringArray (R.array.names)) {
             if (contact.charAt (0) == letter) {
